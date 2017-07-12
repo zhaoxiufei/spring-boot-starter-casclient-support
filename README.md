@@ -26,7 +26,7 @@
 - 必须项
      
      ```bash
-     spring.cas.session-time-out-ignore-urls=/,/logout(按照实际业务设置)
+     spring.cas.session-time-out-ignore-urls=/,/logout(入口和出口)
      spring.cas.cas-server-url-prefix=http://www.cas-server.com:8443 cas认证服务器地址
      spring.cas.cas-server-login-url=${spring.cas.cas-server-url-prefix}/login 登录认证服务器地址
      spring.cas.server-name=http://www.client.com:8080 你的项目地址
