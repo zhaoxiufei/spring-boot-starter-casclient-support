@@ -26,6 +26,7 @@
 - 必须项
      
      ```bash
+     spring.cas.session-time-out-ignore-urls=/,/logout(按照实际业务设置)
      spring.cas.cas-server-url-prefix=http://www.cas-server.com:8443 cas认证服务器地址
      spring.cas.cas-server-login-url=${spring.cas.cas-server-url-prefix}/login 登录认证服务器地址
      spring.cas.server-name=http://www.client.com:8080 你的项目地址
@@ -41,7 +42,6 @@
     spring.cas.ignore-pattern 要忽略的资源,使用正则匹配
     spring.cas.use-session (默认值:true)
     spring.cas.redirect-after-validation (默认值:true)
-    spring.cas.session-time-out-ignore-urls= (默认:/*,一般只需要:/,/logout即可,按照实际业务设置)
     ```
 ##高级配置及扩展
 
