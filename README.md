@@ -41,6 +41,7 @@
     spring.cas.ignore-pattern 要忽略的资源,使用正则匹配
     spring.cas.use-session (默认值:true)
     spring.cas.redirect-after-validation (默认值:true)
+    spring.cas.session-time-out-ignore-urls= (默认:/*,一般只需要:/,/logout即可,按照实际业务设置)
     ```
 ##高级配置及扩展
 
