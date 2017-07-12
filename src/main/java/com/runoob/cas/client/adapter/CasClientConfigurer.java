@@ -1,4 +1,4 @@
-package com.runoob.cas.client.config;
+package com.runoob.cas.client.adapter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
@@ -45,4 +45,11 @@ public interface CasClientConfigurer {
      * @param singleSignOutFilter
      */
     void configureSingleSignOutFilter(FilterRegistrationBean singleSignOutFilter);
+
+    /**
+     * 配置或自定义CAS session超时过滤器。
+     *
+     * @param sessionTimeOutFilter
+     */
+    void configureSessionTimeOutFilter(FilterRegistrationBean sessionTimeOutFilter);
 }

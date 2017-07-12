@@ -50,6 +50,7 @@ public class CasClientAutoConfigurationProperties {
     private List<String> authFilters = Lists.newArrayList();
     private List<String> assertionFilters = Lists.newArrayList();
     private List<String> requestWrapperFilters = Lists.newArrayList();
+    private List<String> sessionTimeOutIgnoreUrls = Lists.newArrayList();
     private boolean useSession = true;
     private boolean redirectAfterValidation = true;
 

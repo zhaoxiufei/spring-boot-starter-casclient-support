@@ -2,7 +2,9 @@ package com.runoob.cas.client.config;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.runoob.cas.client.adapter.CasClientConfigurer;
 import com.runoob.cas.client.autoconfig.CasClientAutoConfigurationProperties;
+import com.runoob.cas.client.filter.SessionTimeOutFilter;
 import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
@@ -34,7 +36,7 @@ import java.util.Map;
 public class CasClientConfiguration {
 
     @Autowired
-    private CasClientAutoConfigurationProperties properties;
+    private CasClientAutoConfigurationProperties casClientAutoConfigurationProperties;
 
     private CasClientConfigurer casClientConfigurer;
     private static boolean casEnabled = true;
@@ -42,11 +44,12 @@ public class CasClientConfiguration {
     public CasClientConfiguration() {
     }
 
-    //
-//    @Bean
-//    public CasClientAutoConfigurationProperties getSpringCasAutoconfig() {
-//        return new CasClientAutoConfigurationProperties();
-//    }
+    @Bean
+    public CasClientAutoConfigurationProperties getSpringCasAutoconfig() {
+        return new CasClientAutoConfigurationProperties();
+    }
+
+
     @Autowired(required = false)
     private void setConfigurers(Collection<CasClientConfigurer> configurers) {
         if (CollectionUtils.isEmpty(configurers)) {
@@ -57,13 +60,23 @@ public class CasClientConfiguration {
         }
         this.casClientConfigurer = configurers.iterator().next();
     }
-
+    @Bean
+    public FilterRegistrationBean sessionTimeOutFilter() {
+        FilterRegistrationBean sessionTimeOutFilter = new FilterRegistrationBean();
+        SessionTimeOutFilter filter = new SessionTimeOutFilter();
+        filter.setCasClientAutoConfigurationProperties(casClientAutoConfigurationProperties);
+        initFilter(sessionTimeOutFilter, filter, 1, Maps.newHashMap(), Lists.newArrayList());
+        if (casClientConfigurer != null) {
+            casClientConfigurer.configureSessionTimeOutFilter(sessionTimeOutFilter);
+        }
+        return sessionTimeOutFilter;
+    }
     @Bean
     public ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> singleSignOutHttpSessionListener() {
         ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> listener = new ServletListenerRegistrationBean<>();
         listener.setEnabled(casEnabled);
         listener.setListener(new SingleSignOutHttpSessionListener());
-        listener.setOrder(1);
+        listener.setOrder(2);
         return listener;
     }
 
@@ -71,8 +84,8 @@ public class CasClientConfiguration {
     public FilterRegistrationBean singleSignOutFilter() {
         FilterRegistrationBean singleSignOutFilter = new FilterRegistrationBean();
         Map<String, String> map = Maps.newHashMap();
-        map.put("casServerUrlPrefix", properties.getCasServerUrlPrefix());
-        initFilter(singleSignOutFilter, new SingleSignOutFilter(), 2, map, properties.getSignOutFilters());
+        map.put("casServerUrlPrefix", casClientAutoConfigurationProperties.getCasServerUrlPrefix());
+        initFilter(singleSignOutFilter, new SingleSignOutFilter(), 3, map, casClientAutoConfigurationProperties.getSignOutFilters());
         if (casClientConfigurer != null) {
             casClientConfigurer.configureSingleSignOutFilter(singleSignOutFilter);
         }
@@ -83,12 +96,12 @@ public class CasClientConfiguration {
     public FilterRegistrationBean authenticationFilter() {
         FilterRegistrationBean authenticationFilter = new FilterRegistrationBean();
         Map<String, String> map = Maps.newHashMap();
-        map.put("casServerLoginUrl", properties.getCasServerLoginUrl());
-        map.put("serverName", properties.getServerName());
-        map.put("useSession", properties.isUseSession() + "");
-        map.put("redirectAfterValidation", properties.isRedirectAfterValidation() + "");
-        map.put("ignorePattern", properties.getIgnorePattern());
-        initFilter(authenticationFilter, new AuthenticationFilter(), 3, map, properties.getAuthFilters());
+        map.put("casServerLoginUrl", casClientAutoConfigurationProperties.getCasServerLoginUrl());
+        map.put("serverName", casClientAutoConfigurationProperties.getServerName());
+        map.put("useSession", casClientAutoConfigurationProperties.isUseSession() + "");
+        map.put("redirectAfterValidation", casClientAutoConfigurationProperties.isRedirectAfterValidation() + "");
+        map.put("ignorePattern", casClientAutoConfigurationProperties.getIgnorePattern());
+        initFilter(authenticationFilter, new AuthenticationFilter(), 4, map, casClientAutoConfigurationProperties.getAuthFilters());
         if (casClientConfigurer != null) {
             casClientConfigurer.configureAuthenticationFilter(authenticationFilter);
         }
@@ -99,9 +112,9 @@ public class CasClientConfiguration {
     public FilterRegistrationBean cas20ProxyReceivingTicketValidationFilter() {
         FilterRegistrationBean validationFilter = new FilterRegistrationBean();
         Map<String, String> map = Maps.newHashMap();
-        map.put("casServerUrlPrefix", properties.getCasServerUrlPrefix());
-        map.put("serverName", properties.getServerName());
-        initFilter(validationFilter, new Cas20ProxyReceivingTicketValidationFilter(), 4, map, properties.getAuthFilters());
+        map.put("casServerUrlPrefix", casClientAutoConfigurationProperties.getCasServerUrlPrefix());
+        map.put("serverName", casClientAutoConfigurationProperties.getServerName());
+        initFilter(validationFilter, new Cas20ProxyReceivingTicketValidationFilter(), 5, map, casClientAutoConfigurationProperties.getAuthFilters());
         if (casClientConfigurer != null) {
             casClientConfigurer.configureValidationFilter(validationFilter);
         }
@@ -111,7 +124,7 @@ public class CasClientConfiguration {
     @Bean
     public FilterRegistrationBean httpServletRequestWrapperFilter() {
         FilterRegistrationBean httpServletRequestWrapperFilter = new FilterRegistrationBean();
-        initFilter(httpServletRequestWrapperFilter, new HttpServletRequestWrapperFilter(), 5, Maps.newHashMap(), Lists.newArrayList());
+        initFilter(httpServletRequestWrapperFilter, new HttpServletRequestWrapperFilter(), 6, Maps.newHashMap(), Lists.newArrayList());
         if (casClientConfigurer != null) {
             casClientConfigurer.configureHttpServletRequestWrapperFilter(httpServletRequestWrapperFilter);
         }
@@ -122,7 +135,7 @@ public class CasClientConfiguration {
     @Bean
     public FilterRegistrationBean assertionThreadLocalFilter() {
         FilterRegistrationBean assertionThreadLocalFilter = new FilterRegistrationBean();
-        initFilter(assertionThreadLocalFilter, new AssertionThreadLocalFilter(), 6, Maps.newHashMap(), properties.getAssertionFilters());
+        initFilter(assertionThreadLocalFilter, new AssertionThreadLocalFilter(), 7, Maps.newHashMap(), casClientAutoConfigurationProperties.getAssertionFilters());
         if (casClientConfigurer != null) {
             casClientConfigurer.configureAssertionThreadLocalFilter(assertionThreadLocalFilter);
         }

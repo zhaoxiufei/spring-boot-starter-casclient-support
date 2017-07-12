@@ -1,4 +1,4 @@
-package com.runoob.cas.client.config;
+package com.runoob.cas.client.adapter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
@@ -29,5 +29,10 @@ public class CasClientConfigurerAdapter implements CasClientConfigurer {
 
     @Override
     public void configureSingleSignOutFilter(FilterRegistrationBean singleSignOutFilter) {
+    }
+
+    @Override
+    public void configureSessionTimeOutFilter(FilterRegistrationBean sessionTimeOutFilter) {
+
     }
 }
