@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.runoob</groupId>
-    <artifactId>spring-boot-starter-cas-client-autoconfig-support</artifactId>
+    <artifactId>spring-boot-starter-casclient-support</artifactId>
     <version>1.0.0.RELEASE</version>
 
     <properties>

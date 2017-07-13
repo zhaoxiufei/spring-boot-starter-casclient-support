@@ -17,7 +17,7 @@
     ```bash
      <dependency>
         <groupId>com.runoob</groupId>
-        <artifactId>spring-boot-starter-cas-client-support</artifactId>
+        <artifactId>spring-boot-starter-casclient-support</artifactId>
         <version>${current-version}</version>
      </dependency>
     ```
