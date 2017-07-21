@@ -48,7 +48,7 @@
     ```
 ##高级配置及扩展
 
-    ```bash
+```java
     class CasProtectedApplication extends CasClientConfigurerAdapter { 
         @Override
         void configureValidationFilter(FilterRegistrationBean validationFilter) {           
@@ -60,6 +60,6 @@
             authenticationFilter.getInitParameters().put("serviceParameterName", "targetService");
         }   
     }
-    ```
+```
     
  
