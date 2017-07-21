@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
  * @version 创建时间：2017/7/6 18:28
  * @since 1.0.0
  */
-public interface CasClientConfigurer {
+public interface CasConfigurer {
 
     /**
      * 配置或自定义CAS认证过滤器

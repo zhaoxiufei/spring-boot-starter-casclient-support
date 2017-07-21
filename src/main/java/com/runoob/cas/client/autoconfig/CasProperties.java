@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @Validated
 @ConfigurationProperties(prefix = "spring.cas")
-public class CasClientAutoConfigurationProperties {
+public class CasProperties {
 
     /**
      * cas server 前缀

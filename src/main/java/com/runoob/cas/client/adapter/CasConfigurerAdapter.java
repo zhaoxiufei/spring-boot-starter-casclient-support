@@ -7,10 +7,10 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
  *
  * @author 赵秀非 E-mail:zhaoxiufei@gmail.com
  * @version 创建时间：2017/7/6 18:28
- * @see CasClientConfigurer
+ * @see CasConfigurer
  * @since 1.0.0
  */
-public class CasClientConfigurerAdapter implements CasClientConfigurer {
+public class CasConfigurerAdapter implements CasConfigurer {
     @Override
     public void configureAuthenticationFilter(FilterRegistrationBean authenticationFilter) {
     }

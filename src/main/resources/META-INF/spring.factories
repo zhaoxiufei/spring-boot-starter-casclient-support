@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.runoob.cas.client.config.CasClientConfiguration
+com.runoob.cas.client.config.CasConfiguration
