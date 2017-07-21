@@ -24,7 +24,7 @@
     ```
 1. application.properties or application.yml中配置
 
-##主要配置项
+## 主要配置项
 
 - 必须项
      
@@ -46,7 +46,8 @@
     spring.cas.use-session (默认值:true)
     spring.cas.redirect-after-validation (默认值:true)
     ```
-##高级配置及扩展
+    
+## 高级配置及扩展
 
 ```java
     class CasProtectedApplication extends CasClientConfigurerAdapter { 
