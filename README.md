@@ -5,12 +5,12 @@
 ## DEMO
 [DEMO地址](https://github.com/zhaoxiufei/runoob/tree/master/runoob-cas)
 
-##当前版本
+## 当前版本
 
     <version>1.0.RELEASE</version>
 
 
-##项目使用
+## 项目使用
 
 1. 下载本项目编译,打jar包
 1. pom.xml 配置 
