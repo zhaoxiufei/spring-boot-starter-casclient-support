@@ -3,7 +3,8 @@
     默认使用CAS2协议协议,包含单点登录和登出,以及SESSION超时后的处理,如需其他实现,请自行更改源码
 ---
 ## DEMO
-[DEMO](https://github.com/zhaoxiufei/runoob/tree/master/runoob-cas)
+[DEMO地址](https://github.com/zhaoxiufei/runoob/tree/master/runoob-cas)
+
 ##当前版本
 
     <version>1.0.RELEASE</version>
